@@ -15,7 +15,7 @@ abstract class AbstractKoma {
   }
 
   void draw() {
-    String komaImage = "";
+      String komaImage = "";
     if (this.team==0 && this.kStat.active) komaImage = this.name+"A.png";
     else if (this.team==1 && this.kStat.active) komaImage = this.name+"B.png";
     else return;
@@ -31,29 +31,12 @@ abstract class AbstractKoma {
     rect(this.x*SQUARESIZE, this.y*SQUARESIZE, SQUARESIZE, SQUARESIZE);
   }
   
- void move(int toX, int toY) {
-    AbstractKoma koma = komaList.getKomaFromPlace(toX, toY);
-    if (koma==null) this.updatePos(toX, toY);
-    else if (koma.team != gs.turn) this.moveAndCapture(koma, toX, toY);
+   void move(int toX, int toY) {
+    this.updatePos(toX, toY);
   }
-
   void updatePos(int toX, int toY) {
     this.x=toX;
     this.y=toY;
-    this.kStat.captured=false;
     gs.turn = (gs.turn+1)%2;
   }
-
-  void moveAndCapture(AbstractKoma enemy, int toX, int toY) {
-    this.updatePos(toX, toY);
-    if (enemy!=null) enemy.captured();
-  }
-
-  void captured() {
-    this.kStat.captured=true;
-    this.team = (this.team+1)%2;
-    this.y = board.mArea[this.team].getBlankYIndex();
-    this.x = board.mArea[this.team].posX;
-  }
-
 }

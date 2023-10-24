@@ -16,10 +16,10 @@ class Board {
     mArea[1].draw();
     iArea.draw();
   }
-}
-
-   void select(int x, int y){
-    AbstractKoma koma = komaList.getSelectedKoma();
+  
+    void select(int x, int y){
+    
+       AbstractKoma koma = komaList.getSelectedKoma();
     if(koma==null){
       komaList.select(x,y);
     }else{
@@ -27,6 +27,9 @@ class Board {
       koma.kStat.selected=false;
     }
   }
+}
 
+
+  
 
  
